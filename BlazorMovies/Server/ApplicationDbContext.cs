@@ -50,6 +50,8 @@ namespace BlazorMovies.Server
             //        UserId = userAdminId
             //    });
 
+            modelBuilder.Entity<Genre>().HasData(new Genre() { Id = 2, Name = "Comedy" });
+
             base.OnModelCreating(modelBuilder);
         }
 
