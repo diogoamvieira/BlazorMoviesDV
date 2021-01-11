@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace BlazorMovies.Server
 {
@@ -8,7 +10,16 @@ namespace BlazorMovies.Server
     {
         public static void Main(string[] args)
         {
-            BuildWebHost(args).Run();
+            var webhost = BuildWebHost(args);
+
+            using (var scope = webhost.Services.CreateScope())
+            {
+                var services = scope.ServiceProvider;
+                var context = services.GetService<ApplicationDbContext>();
+                context.Database.Migrate();
+            }
+
+                webhost.Run();
         }
 
         public static IWebHost BuildWebHost(string[] args) =>
