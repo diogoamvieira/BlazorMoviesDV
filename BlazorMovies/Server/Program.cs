@@ -10,16 +10,7 @@ namespace BlazorMovies.Server
     {
         public static void Main(string[] args)
         {
-            var webhost = BuildWebHost(args);
-
-            using (var scope = webhost.Services.CreateScope())
-            {
-                var services = scope.ServiceProvider;
-                var context = services.GetService<ApplicationDbContext>();
-                context.Database.Migrate();
-            }
-
-                webhost.Run();
+            BuildWebHost(args).Run();
         }
 
         public static IWebHost BuildWebHost(string[] args) =>
