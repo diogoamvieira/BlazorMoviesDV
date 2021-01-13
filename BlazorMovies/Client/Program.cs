@@ -2,6 +2,7 @@
 using BlazorMovies.Client.Auth;
 using BlazorMovies.Client.Helpers;
 using BlazorMovies.Client.Repository;
+using BlazorMovies.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.DependencyInjection;
@@ -26,6 +27,7 @@ namespace BlazorMovies.Client
         private static void ConfigureServices(IServiceCollection services)
         {
             services.AddOptions();
+            services.AddTransient<IExampleInterface, ExampleImplementation>();
             services.AddTransient<IRepository, RepositoryInMemory>();
             services.AddScoped<IHttpService, HttpService>();
             services.AddScoped<IGenreRepository, GenreRepository>();
