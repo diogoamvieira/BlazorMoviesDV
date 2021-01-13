@@ -1,10 +1,19 @@
-﻿<div class="my-component">
+﻿@inject IJSRuntime js
+
+<div class="my-component">
     This Blazor component is defined in the <strong>BlazorMovies.Components</strong> package.
 </div>
 
 @Name - @Param1
 
+<button @onclick="HandlePrompt">Display prompt</button>
+
 @code{
     public string Name { get; set; } = "Diogo";
     [Parameter] public string Param1 { get; set; }
+
+    private void HandlePrompt()
+    {
+        js.Prompt("promp from RCL");
+    }
 }
